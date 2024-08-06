@@ -1,5 +1,5 @@
-# Setup-SSH-For-Containers-Jenkins
- ## Abstract and Architecture:
+# 📌 Setup-SSH-For-Containers-Jenkins 📌
+ ##  🚩 Abstract and Architecture:
  We have two containers, one is Jenkins and the other is a slave has applications & tools. We want to connect the slave to the Jenkins container. So Jenkins can run and excute commands on the other container. We will use SSH to connect the two containers based on the Docker-compose Network.
 
  ![schema](https://github.com/user-attachments/assets/6386458d-e333-4057-a0df-f87f8a8fee3c)
@@ -7,13 +7,13 @@
 
 
 
-## Prerequisites:
+## ⚙️ Prerequisites:
 - Jenkins Image with SSH-Client installed.
 - Tools Image with the tools required & SSH-Server installed.
 - Docker-compose installed.
 
 
-## Imagine the scene :
+## 👨‍💻 Imagine the scene :
 - We are going to Use Jenkins as an interface for the other containers to run pipelines using the other containers which contain tools and applications.
 - After configuring the SSH connection between the Jenkins container and the other containers, we can run pipelines on the other containers using Jenkins.
 - This approach provide us with varity of containers as we can add more containers to the Jenkins container to run different pipelines. (In this example we have only one container )
@@ -24,7 +24,7 @@
 
 
 ## Steps:
-1. Create a Dockerfile for Jenkins container:
+1. ╰┈➤ Create a Dockerfile for Jenkins container:
 ```Dockerfile
 # You will find the files in this repo
 FROM jenkins/jenkins:lts
@@ -48,7 +48,7 @@ RUN apt-get update && apt-get install -y \
 # Expose Jenkins web and agent ports
 EXPOSE 8080 50000
 ```
-2. Create a Dockerfile for the tools container:
+2. ╰┈➤ Create a Dockerfile for the tools container:
 ```Dockerfile
 FROM ubuntu:latest
 #Updating the package list
@@ -124,25 +124,25 @@ CMD ["tail", "-f", "/dev/null"]
 
 
 
-3. Build the Jenkins image:
+3. ╰┈➤ Build the Jenkins image:
 ```bash
 #Make sure to go to the directory where the Dockerfile is located before running the command
 docker build -t jenkinsssh:2 .
 ```
 
-4. Build the tools image:
+4. ╰┈➤ Build the tools image:
 ```bash
 #Make sure to go to the directory where the Dockerfile is located before running the command
 docker build -t tools:1.2 .
 ```
 
-5. If you use the following command, you will see the images you have created:
+5. ╰┈➤ If you use the following command, you will see the images you have created:
     -  ```bash
        docker images
        ```
 
 
-6. Then create a Docker-compose file:
+6. ╰┈➤ Then create a Docker-compose file:
 ```yaml
 version: '3.8'
 
@@ -173,17 +173,17 @@ networks: # Create a network
     driver: bridge
 ```
 
-7. Run the Docker-compose file:
+7. ╰┈➤ Run the Docker-compose file:
 ```bash
 docker-compose up -d
 ```
 
-8. Check the containers You will see the two containers running:
+8. ╰┈➤ Check the containers You will see the two containers running:
 ```bash
 docker ps
 ```
 
-9. Now we are going to Test the SSH connection between the Jenkins container and the tools container:
+9. ╰┈➤ Now we are going to Test the SSH connection between the Jenkins container and the tools container:
     - Go to the Tools container:
     ```bash
     docker exec -it "container name (or ID)" bash
@@ -235,6 +235,6 @@ docker ps
     ```bash
     exit
     ```
-    - Now we have successfully connected the Jenkins container to the tools container using SSH .
+    - Now we have successfully 🎉 connected the Jenkins container to the tools container using SSH .
 
 
