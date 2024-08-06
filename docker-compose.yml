@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkinsssh:2
+    container_name: jenkinsssh
+    ports:
+      - "8085:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - jenkins_network
+
+  tools:
+    image: tools:1.2
+    container_name: tools
+    networks:
+      - jenkins_network
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins_network:
+    driver: bridge
