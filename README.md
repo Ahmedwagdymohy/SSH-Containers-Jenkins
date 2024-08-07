@@ -238,3 +238,62 @@ docker ps
     - Now we have successfully 🎉 connected the Jenkins container to the tools container using SSH .
 
 
+
+
+
+
+  # Using Agents in Jenkins:
+  ***Now we will apply the same approach to Jenkins Agents , cuz it makes the process easer***
+1. After creating the both container we will make the tools container as an agent for Jenkins Because using the Agents make the process easer to manage and control the containers.
+2. Go to Jenkins and **Manage Jenkins**
+
+3. Click on **Manage Nodes and Clouds**
+
+4. Click on **New Node**
+
+5. Fill the form as the following:
+    - **Node Name**: Tools-node
+    - **Remote** root directory: /var/jenkins_home
+    - **Labels**: Tools-node
+    - **Launch method**: Launch agent by connecting it to the master
+    - **Host**: Tools
+    - **Availability**: Keep this agent online as much as possible
+    - **Click Save**
+    - Now you will see the Tools-node in the Nodes list it will be offline.
+    - You will find the commands to run on you machine for our case pick the first one which is linux
+        - ```bash
+          curl -sO http://localhost:8081/jnlpJars/agent.jar
+          java -jar agent.jar -url http://localhost:8081/ -secret 521840ae4207ed1aa0d59ffcf18cec17e6fda112539fad0fc86e72f39eeb02f5 -name Tools-node -workDir "/var/jenkins_home"
+          ```
+    - ⚠️ **Note**: Don't copy and paste the code directly because we are dealing with containers not on the cloud mahcines , so we will donwload the file manulally and transfer it to the docke container.
+    - On you machine it self **Not the containers** run the following command to download the agent.jar file:
+      ```bash
+      curl -sO http://localhost:8081/jnlpJars/agent.jar
+      ```
+
+
+    - Now we are going to download the agent.jar file:
+      ```bash
+      wget http://localhost:8085/jnlpJars/agent.jar
+      ```
+
+    - Run the following command to start the agent:
+      ```bash
+      java -jar agent.jar -url http://localhost:8081/ -secret 521840ae4207ed1aa0d59ffcf18cec17e6fda112539fad0fc86e72f39eeb02f5 -name ggggggg -workDir "/asdsa/asdasd"
+      ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Good tutorial](https://www.youtube.com/watch?v=9RsmPNs7gT0)
