@@ -282,6 +282,7 @@ docker ps
       java -jar agent.jar -url http://localhost:8081/ -secret 521840ae4207ed1aa0d59ffcf18cec17e6fda112539fad0fc86e72f39eeb02f5 -name ggggggg -workDir "/asdsa/asdasd"
       ```
 
+    - Now you will see the Tools-node in the Nodes list it will be online on Jenkins.
 
 
 
